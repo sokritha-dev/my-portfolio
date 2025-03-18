@@ -82,7 +82,7 @@ const projects = [
     category: "Company Project",
     date: "2023",
     description: "Developed an internal e-learning platform enabling admins and coaches to interact through video streaming, and content management. Implemented a micro frontend architecture to scale different platform modules independently.",
-    technologies: ["Next.js", "Serverless Framework", "AWS MediaConvert", "DynamoDB", "GraphQL"],
+    technologies: ["Next.js", "Serverless Framework", "Lambda Function", "DynamoDB", "GraphQL", "Cognito", "Micro Frontend"],
     deployed: true,
   },
   {
@@ -98,7 +98,7 @@ const projects = [
     id: "course-marketplace",
     title: "Course Marketplace",
     category: "Side Project",
-    date: "2021",
+    date: "2022",
     description: "A blockchain-based platform enabling users to purchase online courses via Metamask on the Robsten Test Network. Deployed smart contracts using Infura and hosted on Vercel.",
     technologies: ["Solidity", "Ganache", "Infura", "Web3", "Next.js", "Tailwind CSS"],
     deployed: true,
