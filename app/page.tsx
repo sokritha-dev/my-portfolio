@@ -153,7 +153,7 @@ export default function Home() {
             {/* CV Button */}
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link href="/resume.pdf" target="_blank">
+                <Link href="/cv.pdf" target="_blank">
                   <Button variant="outline" size="icon" className="hover:bg-primary hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300">
                     <FileText className="h-5 w-5" />
                   </Button>
