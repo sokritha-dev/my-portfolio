@@ -181,21 +181,21 @@ export default function Home() {
           {/* About Me Section */}
 
           <TabsContent value="about" className="space-y-6">
-            <Card className="p-8 shadow-lg flex flex-col gap-6">
+            <Card className="p-8 shadow-lg flex flex-col gap-4">
               <div className="flex items-center gap-4">
                 <User className="h-5 w-5" />
                 <h2 className="text-2xl font-bold">About Me</h2>
               </div>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 I am a full-stack developer specializing in frontend, backend, and cloud infrastructure. Passionate about building scalable, high-performance applications, I have hands-on experience with React, Next.js, Node.js, AWS, and DevOps.
               </p>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 In addition to development, I have a strong background in technical mentorship, training and guiding aspiring developers through multiple web development bootcamps.
               </p>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 Currently, I am developing a web scraping automation system leveraging FastAPI, Celery, and AI-driven processing, pushing the boundaries of automation and structured data extraction.
               </p>
-              <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
+              <p className="text-muted-foreground text-lg leading-relaxed">
                 I am also learning Machine Learning (ML) and Deep Neural Networks, focusing on building intelligent systems that can analyze and extract insights from large datasets. I’m particularly interested in clustering algorithms, and neural networks, with the goal of integrating ML into real-world automation solutions. </p>
             </Card>
 
