@@ -159,6 +159,7 @@ const projects = [
       "Docker",
       "Kubernetes",
       "S3",
+      "Better Stack",
     ],
     deployed: true,
     link: "https://thinknlp.xyz", // replace or remove if not deployed publicly
