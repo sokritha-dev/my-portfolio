@@ -190,7 +190,8 @@ const projects = [
     description:
       "Developed a system to scrape and structure data from any website, integrating FastAPI, Celery, and AI-powered processing.",
     technologies: ["FastAPI", "Celery", "React", "MongoDB", "AWS", "Redis"],
-    deployed: false,
+    deployed: true,
+    link: "https://www.prettyscrape.com",
   },
   {
     id: "course-marketplace",
