@@ -1,20 +1,23 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://my-portfolio-ten-taupe-92.vercel.app"),
   title: "Sokritha Yen | Full-Stack Developer & Mentor",
   description:
-    "A passionate full-stack developer specializing in Next.js, FastAPI, and cloud infrastructure.",
+    "Full-stack developer crafting modern web experiences across product UI, backend systems, and cloud delivery.",
   openGraph: {
-    title: "Sokritha Yen | Full-Stack Developer",
+    title: "Sokritha Yen | Full-Stack Developer & Mentor",
     description:
-      "Building scalable, high-performance applications with modern web technologies.",
+      "Modern portfolio for Sokritha Yen, focused on product-minded engineering, full-stack delivery, and mentoring.",
     type: "website",
-    url: "https://my-portfolio-ten-taupe-92.vercel.app/", // Update with your actual URL
+    url: "https://my-portfolio-ten-taupe-92.vercel.app/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sokritha Yen | Full-Stack Developer & Mentor",
+    description:
+      "Modern portfolio focused on thoughtful product engineering, delivery, and mentoring.",
   },
 };
 
@@ -24,12 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" dir="ltr" data-theme="light">
-      <body
-        className={`${inter.variable} font-sans bg-background text-foreground transition-colors duration-300`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans bg-background text-foreground">
         {children}
-        <Analytics />
       </body>
     </html>
   );
