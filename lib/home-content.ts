@@ -42,6 +42,7 @@ export type AvailabilityOption = {
 
 export const heroContent = {
   badge: "Available for selective freelance and product work",
+  name: "Sokritha Yen",
   title: "Full-stack developer building thoughtful, scalable web products.",
   description:
     "I design and ship modern experiences across frontend, backend, and cloud infrastructure, with a strong focus on product clarity, developer experience, and maintainable systems.",
@@ -104,9 +105,9 @@ export const featuredProjects: Project[] = [
     category: "Ecommerce gacha platform",
     date: "Oct 2025 - Present",
     description:
-      "A Japanese gacha platform where I built both the customer-facing site and the admin site, covering the core product experience and internal operations tools.",
+      "A Japanese gacha platform where I built both the customer-facing site and the admin site. After five months in production, it reached **70K USD in revenue** while covering payments, gacha operations, stock workflows, and admin management.",
     impact:
-      "Built the platform independently; after five months in production, it reached 70K USD in revenue while supporting payments, gacha operations, stock workflows, and admin management.",
+      "Built independently end-to-end across the full product surface and internal operations tooling.",
     technologies: ["Next.js", "AWS", "Stripe"],
     link: "https://torecaquest.jp",
   },
@@ -169,6 +170,7 @@ export const featuredProjects: Project[] = [
       "GraphQL",
       "Cognito",
     ],
+    link: "https://sabaicode.com",
   },
 ];
 

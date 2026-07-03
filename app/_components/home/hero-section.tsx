@@ -19,9 +19,12 @@ export function HeroSection() {
                 <Sparkles className="mr-2 h-3.5 w-3.5" />
                 {heroContent.badge}
               </Badge>
-              <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-7xl">
-                {heroContent.title}
+              <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl lg:text-7xl">
+                {heroContent.name}
               </h1>
+              <p className="mt-4 max-w-3xl text-xl font-medium leading-snug tracking-tight text-foreground/90 text-balance sm:text-2xl lg:text-3xl">
+                {heroContent.title}
+              </p>
               <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
                 {heroContent.description}
               </p>

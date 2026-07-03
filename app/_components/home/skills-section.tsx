@@ -1,6 +1,6 @@
+import { SkillsPanel } from "@/app/_components/home/skills-panel";
 import { SectionHeading } from "@/app/_components/home/section-heading";
-import { Badge } from "@/components/ui/badge";
-import { HoverCard, Reveal } from "@/components/home/motion";
+import { Reveal } from "@/components/home/motion";
 import { skillGroups } from "@/lib/home-content";
 
 export function SkillsSection() {
@@ -14,27 +14,8 @@ export function SkillsSection() {
             description="These capabilities reflect the mix of technical depth and team-oriented skills I use to deliver products from idea to production."
           />
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {skillGroups.map((group, index) => (
-            <HoverCard
-              key={group.category}
-              delay={0.05 * index}
-              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)]"
-            >
-              <h3 className="text-lg font-semibold">{group.category}</h3>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <Badge
-                    key={skill}
-                    variant="secondary"
-                    className="rounded-full px-3 py-1"
-                  >
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </HoverCard>
-          ))}
+        <div className="mt-12">
+          <SkillsPanel groups={skillGroups} />
         </div>
       </div>
     </section>
