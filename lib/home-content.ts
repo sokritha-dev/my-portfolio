@@ -311,10 +311,6 @@ export const availabilityOptions: AvailabilityOption[] = [
 
 export const contactLinks = [
   {
-    label: "GitHub",
-    href: "https://github.com/sokritha-dev",
-  },
-  {
     label: "Email",
     href: "mailto:sokritha.yen@gmail.com",
   },

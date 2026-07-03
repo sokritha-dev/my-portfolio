@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Github, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { MotionAccent } from "@/components/home/motion";
 import { Badge } from "@/components/ui/badge";
@@ -52,19 +52,6 @@ export function HeroSection() {
                 >
                   <Link href={heroContent.secondaryCta.href} target="_blank">
                     {heroContent.secondaryCta.label}
-                  </Link>
-                </Button>
-              </MotionAccent>
-              <MotionAccent>
-                <Button
-                  asChild
-                  variant="ghost"
-                  size="lg"
-                  className="h-12 rounded-full px-4 text-muted-foreground"
-                >
-                  <Link href="https://github.com/sokritha-dev" target="_blank">
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
                   </Link>
                 </Button>
               </MotionAccent>
