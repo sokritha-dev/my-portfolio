@@ -2,25 +2,38 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+import { NoteSections } from "@/app/_components/notes/note-sections";
 import { SiteNavigation } from "@/app/_components/site-navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getAllNotes, getNoteBySlug } from "@/lib/notes-content";
+import { getNoteBySlug, getNoteSlugs } from "@/lib/sanity/notes";
+import { isSanityConfigured } from "@/lib/sanity/client";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export function generateStaticParams() {
-  return getAllNotes().map((note) => ({
-    slug: note.slug,
-  }));
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  if (!isSanityConfigured()) {
+    return [{ slug: "preview" }];
+  }
+
+  const slugs = await getNoteSlugs();
+
+  if (slugs.length === 0) {
+    return [{ slug: "preview" }];
+  }
+
+  return slugs.map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const note = getNoteBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const note = await getNoteBySlug(slug);
 
   if (!note) {
     return {
@@ -34,8 +47,14 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function NoteDetailPage({ params }: Props) {
-  const note = getNoteBySlug(params.slug);
+export default async function NoteDetailPage({ params }: Props) {
+  const { slug } = await params;
+
+  if (slug === "preview") {
+    notFound();
+  }
+
+  const note = await getNoteBySlug(slug);
 
   if (!note) {
     notFound();
@@ -61,30 +80,7 @@ export default function NoteDetailPage({ params }: Props) {
             {note.summary}
           </p>
 
-          <div className="mt-10 space-y-10">
-            {note.sections.map((section) => (
-              <section key={section.heading}>
-                <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
-                  {section.heading}
-                </h2>
-                <div className="mt-4 space-y-4 text-base leading-7 text-foreground/90">
-                  {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-                {section.bullets?.length ? (
-                  <ul className="mt-5 space-y-3 text-base leading-7 text-foreground/90">
-                    {section.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-3">
-                        <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[hsl(var(--accent-strong))]" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </section>
-            ))}
-          </div>
+          <NoteSections sections={note.sections} />
 
           <div className="mt-12">
             <Button asChild variant="outline" className="rounded-full">

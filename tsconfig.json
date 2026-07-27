@@ -23,5 +23,13 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "sanity.config.ts",
+    "sanity.cli.ts",
+    "sanity/schemaTypes",
+    "sanity/env-loader.node.ts",
+    "sanity/studio-env.generated.ts",
+    "scripts"
+  ]
 }

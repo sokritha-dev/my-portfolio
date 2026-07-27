@@ -1,27 +1,29 @@
+/**
+ * Starter note content used by `npm run sanity:seed`.
+ * Published notes are managed in Sanity Studio after seeding.
+ */
 export type NoteSection = {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
 };
 
-export type Note = {
+export type SeedNote = {
   slug: string;
   title: string;
   summary: string;
   publishedAt: string;
-  displayDate: string;
   tags: string[];
   sections: NoteSection[];
 };
 
-export const notes: Note[] = [
+export const seedNotes: SeedNote[] = [
   {
     slug: "shipping-a-product-alone",
     title: "Shipping a product alone changes how you make decisions",
     summary:
       "A short note on balancing speed, ownership, and maintainability when one engineer is responsible for the full product surface.",
     publishedAt: "2026-06-14",
-    displayDate: "Jun 14, 2026",
     tags: ["Product", "Execution", "Solo Building"],
     sections: [
       {
@@ -50,7 +52,6 @@ export const notes: Note[] = [
     summary:
       "A practical note on why product search quality depends on how product data is prepared before the search experience is built.",
     publishedAt: "2026-06-28",
-    displayDate: "Jun 28, 2026",
     tags: ["Search", "Data", "Laravel"],
     sections: [
       {
@@ -79,7 +80,6 @@ export const notes: Note[] = [
     summary:
       "Why utility apps deserve the same product thinking as larger platforms, especially when they are built for repeated personal or team workflows.",
     publishedAt: "2026-07-01",
-    displayDate: "Jul 1, 2026",
     tags: ["Tools", "UX", "Personal Projects"],
     sections: [
       {
@@ -103,11 +103,3 @@ export const notes: Note[] = [
     ],
   },
 ];
-
-export function getAllNotes() {
-  return [...notes].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-}
-
-export function getNoteBySlug(slug: string) {
-  return notes.find((note) => note.slug === slug);
-}

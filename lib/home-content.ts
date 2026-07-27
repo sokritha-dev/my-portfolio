@@ -105,7 +105,7 @@ export const featuredProjects: Project[] = [
     category: "Ecommerce gacha platform",
     date: "Oct 2025 - Present",
     description:
-      "A Japanese gacha platform where I built both the customer-facing site and the admin site. After five months in production, it reached **70K USD in revenue** while covering payments, gacha operations, stock workflows, and admin management.",
+      "A Japanese gacha platform where I built both the customer-facing site and the admin site. It reached **high five-figure revenue** within **less than two quarters** of launch, covering payments, gacha operations, stock workflows, and admin management.",
     impact:
       "Built independently end-to-end across the full product surface and internal operations tooling.",
     technologies: ["Next.js", "AWS", "Stripe"],
