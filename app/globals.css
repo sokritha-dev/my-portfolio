@@ -4,68 +4,34 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
-    --foreground: 224 30% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 30% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 30% 12%;
-    --primary: 230 72% 56%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 30% 96%;
-    --secondary-foreground: 224 30% 12%;
-    --muted: 220 33% 95%;
-    --muted-foreground: 222 12% 41%;
-    --accent: 220 30% 96%;
-    --accent-foreground: 224 30% 12%;
+    --background: 40 20% 96%;
+    --foreground: 30 10% 12%;
+    --card: 40 25% 98%;
+    --card-foreground: 30 10% 12%;
+    --popover: 40 25% 98%;
+    --popover-foreground: 30 10% 12%;
+    --primary: 30 10% 12%;
+    --primary-foreground: 40 20% 96%;
+    --secondary: 40 12% 92%;
+    --secondary-foreground: 30 10% 12%;
+    --muted: 40 12% 92%;
+    --muted-foreground: 30 6% 42%;
+    --accent: 40 12% 92%;
+    --accent-foreground: 30 10% 12%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 222 24% 88%;
-    --input: 222 24% 88%;
-    --ring: 230 72% 56%;
-    --chart-1: 230 72% 56%;
-    --chart-2: 189 72% 42%;
-    --chart-3: 270 58% 59%;
-    --chart-4: 31 88% 58%;
-    --chart-5: 344 78% 62%;
-    --radius: 1.25rem;
-    --accent-soft: 230 100% 96%;
-    --accent-strong: 230 72% 56%;
-    --hero-glow: 234 89% 67%;
-    --hero-surface: 0 0% 100%;
-    --shadow-soft: 0 20px 60px -30px hsl(229 55% 25% / 0.28);
-  }
-
-  .dark {
-    --background: 228 32% 8%;
-    --foreground: 210 40% 96%;
-    --card: 229 30% 12%;
-    --card-foreground: 210 40% 96%;
-    --popover: 229 30% 12%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 224 100% 72%;
-    --primary-foreground: 228 32% 10%;
-    --secondary: 228 20% 17%;
-    --secondary-foreground: 210 40% 96%;
-    --muted: 228 20% 15%;
-    --muted-foreground: 220 14% 72%;
-    --accent: 228 20% 15%;
-    --accent-foreground: 210 40% 96%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 228 18% 22%;
-    --input: 228 18% 22%;
-    --ring: 224 100% 72%;
-    --chart-1: 224 100% 72%;
-    --chart-2: 189 76% 57%;
-    --chart-3: 270 75% 67%;
-    --chart-4: 31 88% 58%;
-    --chart-5: 344 78% 62%;
-    --accent-soft: 228 45% 16%;
-    --accent-strong: 224 100% 72%;
-    --hero-glow: 224 100% 72%;
-    --hero-surface: 229 30% 12%;
-    --shadow-soft: 0 20px 60px -30px hsl(225 80% 4% / 0.8);
+    --border: 30 10% 84%;
+    --input: 30 10% 84%;
+    --ring: 30 10% 12%;
+    --chart-1: 217 89% 61%;
+    --chart-2: 4 82% 56%;
+    --chart-3: 45 96% 50%;
+    --chart-4: 136 53% 43%;
+    --chart-5: 30 10% 40%;
+    --radius: 0.25rem;
+    --label-gold: 36 35% 42%;
+    --status-blue: 214 72% 52%;
+    --hairline: 30 8% 86%;
   }
 }
 
@@ -76,15 +42,54 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-image:
-      radial-gradient(circle at top, hsl(var(--hero-glow) / 0.12), transparent 30%),
-      linear-gradient(180deg, hsl(var(--background)), hsl(var(--background)));
     min-height: 100vh;
+    overflow-x: clip;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif), "Fraunces", ui-serif, Georgia, serif;
+  }
+
+  .hero-process-marker {
+    animation: hero-process-travel 8s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-process-marker {
+      animation: none;
+      left: 62.5%;
+    }
+  }
+}
+
+@keyframes hero-process-travel {
+  0%,
+  18% {
+    left: 12.5%;
+  }
+  25%,
+  43% {
+    left: 37.5%;
+  }
+  50%,
+  68% {
+    left: 62.5%;
+  }
+  75%,
+  93% {
+    left: 87.5%;
+  }
+  100% {
+    left: 12.5%;
   }
 }

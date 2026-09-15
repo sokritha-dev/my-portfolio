@@ -1,30 +1,44 @@
 import "./globals.css";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans, Noto_Serif_Khmer } from "next/font/google";
 import type { Metadata } from "next";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const fraunces = Fraunces({
   subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const notoSerifKhmer = Noto_Serif_Khmer({
+  subsets: ["khmer"],
+  weight: ["500", "600", "700"],
+  variable: "--font-khmer",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://my-portfolio-ten-taupe-92.vercel.app"),
-  title: "Sokritha Yen | Full-Stack Developer & Mentor",
+  title: "Yen Sokritha | Full-Stack Web Engineer",
   description:
-    "Full-stack developer crafting modern web experiences across product UI, backend systems, and cloud delivery.",
+    "Full-stack web engineer with 4+ years of experience building web apps with TypeScript, Node.js, React, Next.js, AWS, payments, and AI-powered search.",
   openGraph: {
-    title: "Sokritha Yen | Full-Stack Developer & Mentor",
+    title: "Yen Sokritha | Full-Stack Web Engineer",
     description:
-      "Modern portfolio for Sokritha Yen, focused on product-minded engineering, full-stack delivery, and mentoring.",
+      "Full-stack web engineer focused on product delivery, AWS infrastructure, payment integration, and AI-powered search.",
     type: "website",
     url: "https://my-portfolio-ten-taupe-92.vercel.app/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sokritha Yen | Full-Stack Developer & Mentor",
+    title: "Yen Sokritha | Full-Stack Web Engineer",
     description:
-      "Modern portfolio focused on thoughtful product engineering, delivery, and mentoring.",
+      "Full-stack web engineer focused on product delivery, AWS infrastructure, payment integration, and AI-powered search.",
   },
 };
 
@@ -34,7 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${ibmPlexSans.variable} ${fraunces.variable} ${notoSerifKhmer.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-sans bg-background text-foreground antialiased">
         {children}
       </body>

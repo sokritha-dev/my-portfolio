@@ -1,81 +1,83 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
 
-import { MotionAccent } from "@/components/home/motion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/home/motion";
-import { featuredMetrics, heroContent } from "@/lib/home-content";
+import { FadeIn } from "@/components/home/motion";
+import { heroContent, processRailSteps } from "@/lib/home-content";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-4 pt-6 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="rounded-[calc(var(--radius)*2)] border border-border/60 bg-[hsl(var(--card)/0.72)] px-5 py-6 shadow-[var(--shadow-soft)] backdrop-blur sm:px-8">
-          <div className="relative overflow-hidden rounded-[calc(var(--radius)*2)] border border-white/10 bg-[radial-gradient(circle_at_top,hsl(var(--hero-glow)/0.22),transparent_42%),linear-gradient(180deg,hsl(var(--hero-surface)),hsl(var(--card)))] px-5 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            <div className="max-w-3xl">
-              <Badge className="rounded-full border border-white/10 bg-white/10 px-4 py-1 text-xs font-medium text-foreground shadow-none">
-                <Sparkles className="mr-2 h-3.5 w-3.5" />
+    <section className="px-4 pb-12 pt-8 sm:px-8 sm:pb-16 sm:pt-14 lg:px-10">
+      <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[9rem_minmax(0,1fr)] lg:gap-12">
+        <div className="hidden lg:block" aria-hidden />
+
+        <div className="min-w-0 max-w-2xl">
+          <FadeIn delay={1.85}>
+            <div className="flex items-start gap-2.5 sm:items-center">
+              <span
+                className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[hsl(var(--status-blue))] sm:mt-0"
+                aria-hidden
+              />
+              <p className="text-sm leading-5 text-muted-foreground">
                 {heroContent.badge}
-              </Badge>
-              <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl lg:text-7xl">
-                {heroContent.name}
-              </h1>
-              <p className="mt-4 max-w-3xl text-xl font-medium leading-snug tracking-tight text-foreground/90 text-balance sm:text-2xl lg:text-3xl">
-                {heroContent.title}
-              </p>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-                {heroContent.description}
               </p>
             </div>
+          </FadeIn>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <MotionAccent>
-                <Button
-                  asChild
-                  size="lg"
-                  className="h-12 rounded-full px-6 shadow-[var(--shadow-soft)]"
-                >
-                  <Link href={heroContent.primaryCta.href}>
-                    {heroContent.primaryCta.label}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </MotionAccent>
-              <MotionAccent>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="h-12 rounded-full border-border/70 bg-background/70 px-6"
-                >
-                  <Link href={heroContent.secondaryCta.href} target="_blank">
-                    {heroContent.secondaryCta.label}
-                  </Link>
-                </Button>
-              </MotionAccent>
+          <FadeIn delay={2.0}>
+            <h1 className="mt-6 text-balance font-serif text-[2rem] font-semibold leading-[1.15] tracking-tight text-foreground sm:mt-8 sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
+              {heroContent.title}
+            </h1>
+          </FadeIn>
+
+          <FadeIn delay={2.1}>
+            <p className="mt-4 text-base font-medium leading-snug text-foreground/85 sm:mt-5 sm:text-xl">
+              {heroContent.subtitle}
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={2.2}>
+            <p className="mt-4 max-w-xl text-[15px] leading-7 text-muted-foreground sm:mt-5 sm:text-base">
+              {heroContent.description}
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={2.3}>
+            <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+              <Link
+                href={heroContent.primaryCta.href}
+                className="inline-flex w-full items-center justify-center border border-foreground px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground hover:text-background sm:w-auto"
+              >
+                {heroContent.primaryCta.label}
+              </Link>
+              <Link
+                href={heroContent.secondaryCta.href}
+                target="_blank"
+                className="text-center text-sm text-foreground underline underline-offset-4 decoration-foreground/40 transition-colors hover:decoration-foreground sm:text-left"
+              >
+                {heroContent.secondaryCta.label}
+              </Link>
             </div>
+          </FadeIn>
 
-            <Reveal
-              delay={0.14}
-              className="mt-12 grid gap-4 border-t border-white/10 pt-8 sm:grid-cols-3"
-            >
-              {featuredMetrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
-                >
-                  <p className="text-2xl font-semibold tracking-tight">
-                    {metric.value}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {metric.label}
-                  </p>
-                </div>
-              ))}
-            </Reveal>
-          </div>
+          <FadeIn delay={2.45}>
+            <div className="mt-10 max-w-xl sm:mt-14">
+              <div className="relative h-px bg-[hsl(var(--hairline))]">
+                <span
+                  className="hero-process-marker absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--status-blue))]"
+                  aria-hidden
+                />
+              </div>
+              <div className="mt-3 grid grid-cols-4 gap-1 sm:gap-2">
+                {processRailSteps.map((step) => (
+                  <span
+                    key={step}
+                    className="text-center font-mono text-[9px] uppercase tracking-[0.04em] text-muted-foreground sm:text-[11px] sm:tracking-[0.08em]"
+                  >
+                    {step}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>

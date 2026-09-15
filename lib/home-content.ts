@@ -42,13 +42,14 @@ export type AvailabilityOption = {
 
 export const heroContent = {
   badge: "Available for selective freelance and product work",
-  name: "Sokritha Yen",
-  title: "Full-stack developer building thoughtful, scalable web products.",
+  name: "Yen Sokritha",
+  title: "Full-stack web engineer",
+  subtitle: "4+ years building and maintaining web applications",
   description:
-    "I design and ship modern experiences across frontend, backend, and cloud infrastructure, with a strong focus on product clarity, developer experience, and maintainable systems.",
+    "Full-stack developer with 4+ years of experience building and maintaining web applications using TypeScript, Node.js, React, Next.js, databases, and AWS. Experienced in backend development, API integration, database transactions, payment integration, and AI-powered search — from feature implementation and issue investigation through deployment and production support.",
   primaryCta: {
     label: "Let’s work together",
-    href: "mailto:sokritha.yen@gmail.com",
+    href: "mailto:sokritha.dev@gmail.com",
   },
   secondaryCta: {
     label: "View resume",
@@ -56,10 +57,24 @@ export const heroContent = {
   },
 };
 
+export const processRailSteps = [
+  "plan",
+  "design",
+  "build",
+  "deploy",
+] as const;
+
+export const welcomeIntro = {
+  greeting: "Hello",
+  greetingKhmer: "សួស្តី",
+  message: "Glad you’re here.",
+  name: "Yen Sokritha",
+};
+
 export const featuredMetrics: FeaturedMetric[] = [
   { value: "4+", label: "Years building web products" },
-  { value: "4", label: "Bootcamps coached end-to-end" },
-  { value: "AWS", label: "Cloud-first delivery mindset" },
+  { value: "3", label: "Products shipped — Japan & local" },
+  { value: "60", label: "Students mentored across bootcamps" },
 ];
 
 export const valuePillars: ValuePillar[] = [
@@ -78,11 +93,11 @@ export const valuePillars: ValuePillar[] = [
     eyebrow: "Technical depth",
     title: "Full-stack delivery",
     description:
-      "From polished interfaces to backend workflows and cloud deployment, I ship complete systems instead of isolated screens.",
+      "From polished interfaces to backend workflows, payments, and cloud deployment, I ship complete systems instead of isolated screens.",
     bullets: [
-      "Next.js, React, TypeScript, Tailwind CSS",
-      "FastAPI, Node.js, GraphQL, MongoDB, PostgreSQL",
-      "AWS, Docker, CI/CD, serverless infrastructure",
+      "React, Next.js, TypeScript, Tailwind CSS",
+      "Node.js, Express, GraphQL, MySQL, MongoDB, DynamoDB",
+      "AWS, Docker, CI/CD, payments, AI-powered search",
     ],
   },
   {
@@ -103,43 +118,37 @@ export const featuredProjects: Project[] = [
     title: "TorecaQuest",
     group: "professional",
     category: "Ecommerce gacha platform",
-    date: "Oct 2025 - Present",
+    date: "Launched Feb 2026 · Oct 2025 - Present",
     description:
-      "A Japanese gacha platform where I built both the customer-facing site and the admin site. It reached **high five-figure revenue** within **less than two quarters** of launch, covering payments, gacha operations, stock workflows, and admin management.",
+      "Independently developed and maintained the user-facing and admin applications for a Japanese gacha platform using Next.js, TypeScript, Prisma, and MariaDB — supporting ~1,200 registered users and 900K gacha draws. Built core gacha and business-rule systems (probability-based, fixed-allocation, and hybrid draws) plus inventory, coin exchange, rank, delivery, draw history, and admin workflows.",
     impact:
-      "Built independently end-to-end across the full product surface and internal operations tooling.",
-    technologies: ["Next.js", "AWS", "Stripe"],
+      "Integrated Stripe (cards, Google Pay, Apple Pay, convenience-store payments, bank transfers, refunds) and operated production on AWS EC2, RDS, S3, ALB, and CloudWatch.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "MariaDB",
+      "Stripe",
+      "AWS",
+    ],
     link: "https://torecaquest.jp",
   },
   {
     title: "FRANCE BED",
     group: "professional",
-    category: "Product search and data pipeline",
-    date: "End of May 2026 - Present",
+    category: "AI product search platform",
+    date: "Beta · 2026 - Present",
     description:
-      "In FRANCE BED project, I worked within a team on the product-search side of the system, focusing on embedding product data into vector search and building a free-text search experience.",
+      "Developed an AI-powered multimodal product search system supporting text and image queries for a catalog of ~150K products, using embeddings and GCP Vector Search. Designed the product embedding pipeline (fields to embed, metadata, filtering/retrieval) and migrated from text-embedding-005 to Gemini Embedding 2.",
     impact:
-      "Contributed specifically to the search pipeline and search-related features that improved how users discover and query product data.",
-    technologies: ["Laravel", "Vector Search"],
-  },
-  {
-    title: "ThinkNLP",
-    group: "personal",
-    category: "Educational AI product",
-    date: "2025",
-    description:
-      "An educational app for NLP beginners to explore sentiment analysis and topic modeling with guided workflows and visual feedback.",
-    impact:
-      "Built an interactive learning experience that turns complex NLP concepts into approachable product flows.",
+      "Implemented hybrid SQL + vector search and evaluated retrieval with Recall@K, MRR, NDCG, and Hit Rate. Built Laravel/Blade features including admin management, product pages, and attribute-based related-product recommendations.",
     technologies: [
-      "FastAPI",
-      "React",
-      "PostgreSQL",
-      "Docker",
-      "Kubernetes",
-      "S3",
+      "Laravel",
+      "Blade",
+      "GCP Vector Search",
+      "Embeddings",
+      "Gemini Embedding 2",
     ],
-    link: "https://thinknlp.xyz",
   },
   {
     title: "Chakku",
@@ -154,21 +163,39 @@ export const featuredProjects: Project[] = [
     link: "https://chakku.cloud",
   },
   {
+    title: "ThinkNLP",
+    group: "personal",
+    category: "Educational AI product · Archived",
+    date: "2025",
+    description:
+      "An educational app for NLP beginners to explore sentiment analysis and topic modeling with guided workflows and visual feedback.",
+    impact:
+      "Built an interactive learning experience that turns complex NLP concepts into approachable product flows. The public site is no longer live.",
+    technologies: [
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "Docker",
+      "Kubernetes",
+      "S3",
+    ],
+  },
+  {
     title: "E-Learning Management System",
     group: "professional",
     category: "Platform engineering",
-    date: "2023 - 2025",
+    date: "Jun 2022 - Jan 2025",
     description:
-      "An internal e-learning platform for admins and coaches with modular architecture, video content workflows, and scalable operations.",
+      "Developed the E-Learning Platform using Serverless, GraphQL/AppSync, and AWS — contributing to beta and production features including video tutorials, class and lesson management, authentication, staff/admin management, scholarship submission and review workflows, and school landing pages.",
     impact:
-      "Helped shape a micro frontend system that allowed independent platform modules to evolve with less coupling.",
+      "Shipped platform features across the full lifecycle while mentoring 60 students across four full-stack web development bootcamps.",
     technologies: [
-      "Next.js",
       "Serverless Framework",
-      "Lambda",
-      "DynamoDB",
       "GraphQL",
-      "Cognito",
+      "AppSync",
+      "AWS",
+      "DynamoDB",
+      "Lambda",
     ],
     link: "https://sabaicode.com",
   },
@@ -176,104 +203,123 @@ export const featuredProjects: Project[] = [
 
 export const experiences: TimelineItem[] = [
   {
-    title: "Software Engineer",
-    organization: "MarinaxPP",
+    title: "Full Stack Web Engineer",
+    organization: "Marinax PP (Cambodia) Co., Ltd.",
     period: "Oct 2025 - Present",
     description:
-      "Working on software solutions for the Japanese market, including building TorecaQuest independently and contributing to FRANCE BED search features, product-data embedding pipelines, and Laravel-based development.",
+      "Building and operating Japanese-market products: independently shipped TorecaQuest (gacha platform with Stripe payments and AWS production ops) and contributed to the FRANCE BED data platform with multimodal AI search, embedding pipelines, and Laravel features.",
   },
   {
-    title: "Web Development Coach & Full-Stack Developer",
-    organization: "SabaiCode School",
+    title: "Coach & Full Stack Developer",
+    organization: "SabaiCode",
     period: "Jun 2022 - Jan 2025",
     description:
-      "Built an internal e-learning system with micro frontends, serverless backend, and AWS infrastructure while coaching four six-month web development bootcamps.",
+      "Built the E-Learning Platform with Serverless, GraphQL/AppSync, and AWS. Mentored 60 students across four Full-Stack Web Development Bootcamps covering frontend, backend, databases, Git/GitHub, CI/CD, Docker, and AWS — including curriculum design and guiding 3–4 projects per bootcamp.",
   },
   {
-    title: "Full-Stack Developer Intern",
-    organization: "Cambodia Securities Exchange",
-    period: "2021",
+    title: "Web Developer Intern",
+    organization: "The Cambodia Securities Exchange",
+    period: "2021 · 3 months",
     description:
-      "Developed a real-time renewal system that managed investor data and integrated with external systems over TCP and UDP.",
+      "Developed a real-time investor order and information renewal system, integrating with other systems via TCP/UDP using React, WebSocket, Java, Spring Boot, REST, and MySQL.",
   },
   {
     title: "Frontend Developer Intern",
-    organization: "Optistech Co., Ltd.",
-    period: "2020",
+    organization: "Optistech Company",
+    period: "2020 · 3 months",
     description:
-      "Designed and implemented a dashboard for ticket management with seamless integration into the existing backend.",
+      "Designed and implemented a new dashboard for managing the ticket system, integrating with the existing backend using Angular and Material UI.",
   },
 ];
 
 export const education = {
-  title: "Computer Science",
+  title: "Bachelor Degree of Computer Science",
   organization: "Institute of Technology of Cambodia",
   description:
-    "Bachelor's degree focused on software engineering fundamentals, system thinking, and practical development foundations.",
+    "2016–2021. Also completed the ESL Program at Beltei International School (2017).",
 };
 
 export const communityHighlights: TimelineItem[] = [
   {
     title: "Evaluator",
     organization: "Game Changer Coalition",
-    period: "Community leadership",
+    period: "End of 2024",
     description:
       "Reviewed student game submissions for a national innovation program supported by MoEYS and UNICEF, with a focus on creativity and impact.",
   },
   {
     title: "Trainer",
     organization: "Institute of Technology of Cambodia",
-    period: "Volunteer work",
+    period: "2019 · 3 months",
     description:
-      "Taught junior students programming fundamentals and algorithmic thinking through introductory C sessions.",
+      "Delivered comprehensive training on basic algorithms and programming in C to junior students.",
+  },
+  {
+    title: "Environmental Teacher",
+    organization: "Global Peace Organization",
+    period: "2017 · 3 months",
+    description:
+      "Educated third-grade students at Kdey Takoy Primary School about environmental subjects.",
   },
 ];
 
 export const skillGroups: SkillGroup[] = [
   {
+    category: "Languages",
+    skills: ["JavaScript", "TypeScript"],
+  },
+  {
     category: "Frontend",
-    skills: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Micro Frontend",
-    ],
+    skills: ["React", "Next.js", "Tailwind CSS", "Micro Frontend"],
   },
   {
     category: "Backend",
     skills: [
       "Node.js",
       "Express",
-      "FastAPI",
-      "MongoDB",
-      "DynamoDB",
       "GraphQL",
-      "REST API",
-      "Testing",
+      "MongoDB",
+      "MySQL",
+      "DynamoDB",
+      "Serverless",
     ],
   },
   {
-    category: "Cloud & Delivery",
+    category: "Cloud & Infrastructure",
     skills: [
       "AWS",
-      "Docker",
-      "GitHub Actions",
-      "CI/CD",
-      "Serverless Framework",
+      "EC2",
+      "RDS",
       "S3",
-      "Route 53",
+      "Lambda",
+      "ALB",
       "CloudWatch",
+      "Docker",
+      "Nginx",
     ],
   },
   {
-    category: "Leadership",
+    category: "DevOps",
+    skills: ["Git", "GitHub Actions", "CI/CD"],
+  },
+  {
+    category: "AI & Search",
     skills: [
-      "Mentorship",
-      "Technical Writing",
-      "Cross-team Collaboration",
-      "Project Planning",
-      "Presentation Skills",
+      "LLM APIs",
+      "Embeddings",
+      "Multimodal Embeddings",
+      "Vector Search",
+    ],
+  },
+  {
+    category: "Payments",
+    skills: [
+      "Stripe",
+      "Credit cards",
+      "Google Pay",
+      "Apple Pay",
+      "Convenience-store payments",
+      "Bank transfers",
     ],
   },
 ];
@@ -281,7 +327,8 @@ export const skillGroups: SkillGroup[] = [
 export const availabilityOptions: AvailabilityOption[] = [
   {
     title: "Freelance product build",
-    summary: "For founders or teams who need a reliable engineer to ship a polished product slice.",
+    summary:
+      "For founders or teams who need a reliable engineer to ship a polished product slice.",
     details: [
       "Landing pages and product surfaces",
       "API and integration work",
@@ -291,7 +338,8 @@ export const availabilityOptions: AvailabilityOption[] = [
   },
   {
     title: "Frontend acceleration",
-    summary: "For teams that need help improving UI quality, performance, and implementation clarity.",
+    summary:
+      "For teams that need help improving UI quality, performance, and implementation clarity.",
     details: [
       "Responsive interface architecture",
       "Design-system minded Tailwind workflows",
@@ -300,7 +348,8 @@ export const availabilityOptions: AvailabilityOption[] = [
   },
   {
     title: "Mentoring and technical guidance",
-    summary: "For developers or small teams who want hands-on support with code quality and product thinking.",
+    summary:
+      "For developers or small teams who want hands-on support with code quality and product thinking.",
     details: [
       "Code reviews and pairing",
       "Implementation strategy coaching",
@@ -312,7 +361,11 @@ export const availabilityOptions: AvailabilityOption[] = [
 export const contactLinks = [
   {
     label: "Email",
-    href: "mailto:sokritha.yen@gmail.com",
+    href: "mailto:sokritha.dev@gmail.com",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/sokritha-yen",
   },
   {
     label: "Resume",

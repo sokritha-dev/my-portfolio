@@ -1,94 +1,75 @@
-import { BriefcaseBusiness, GraduationCap, HeartHandshake } from "lucide-react";
-
-import { SectionHeading } from "@/app/_components/home/section-heading";
-import { HoverCard, Reveal } from "@/components/home/motion";
-import { communityHighlights, education, experiences } from "@/lib/home-content";
-
-function TimelineList({
-  items,
-}: {
-  items: {
-    title: string;
-    organization: string;
-    period: string;
-    description: string;
-  }[];
-}) {
-  return (
-    <div className="space-y-6">
-      {items.map((item) => (
-        <div
-          key={`${item.title}-${item.organization}`}
-          className="relative border-l border-border/70 pl-5"
-        >
-          <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[hsl(var(--accent-strong))]" />
-          <p className="text-sm text-muted-foreground">{item.period}</p>
-          <h3 className="mt-2 text-lg font-semibold">{item.title}</h3>
-          <p className="text-sm font-medium text-foreground/80">
-            {item.organization}
-          </p>
-          <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            {item.description}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
+import { SectionRail } from "@/app/_components/home/section-rail";
+import { Stagger, StaggerItem } from "@/components/home/motion";
+import {
+  communityHighlights,
+  education,
+  experiences,
+} from "@/lib/home-content";
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Experience"
-            title="Hands-on delivery shaped by product work, teaching, and community involvement."
-            description="My background combines product delivery, technical coaching, and community work, shaping how I build software and collaborate with teams."
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <HoverCard className="rounded-3xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)]">
-            <div className="flex items-center gap-3">
-              <BriefcaseBusiness className="h-5 w-5 text-[hsl(var(--accent-strong))]" />
-              <h3 className="text-xl font-semibold">Professional experience</h3>
-            </div>
-            <div className="mt-6">
-              <TimelineList items={experiences} />
-            </div>
-          </HoverCard>
-          <div className="grid gap-5">
-            <HoverCard
-              delay={0.05}
-              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)]"
-            >
-              <div className="flex items-center gap-3">
-                <GraduationCap className="h-5 w-5 text-[hsl(var(--accent-strong))]" />
-                <h3 className="text-xl font-semibold">Education</h3>
-              </div>
-              <p className="mt-5 text-sm text-muted-foreground">
-                {education.organization}
-              </p>
-              <p className="mt-2 text-lg font-semibold">{education.title}</p>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                {education.description}
-              </p>
-            </HoverCard>
-            <HoverCard
-              delay={0.1}
-              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)]"
-            >
-              <div className="flex items-center gap-3">
-                <HeartHandshake className="h-5 w-5 text-[hsl(var(--accent-strong))]" />
-                <h3 className="text-xl font-semibold">Community and mentoring</h3>
-              </div>
-              <div className="mt-6">
-                <TimelineList items={communityHighlights} />
-              </div>
-            </HoverCard>
-          </div>
+    <SectionRail id="experience" label="Experience">
+      <div className="space-y-12">
+        <Stagger className="space-y-10">
+          {experiences.map((item) => (
+            <StaggerItem key={`${item.title}-${item.organization}`}>
+              <article>
+                <p className="text-sm text-muted-foreground">{item.period}</p>
+                <h3 className="mt-2 font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-sm font-medium text-foreground/80">
+                  {item.organization}
+                </p>
+                <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
+                  {item.description}
+                </p>
+              </article>
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        <Stagger>
+          <StaggerItem className="border-t border-[hsl(var(--hairline))] pt-10">
+            <p className="text-xs font-medium uppercase tracking-[0.12em] text-[hsl(var(--label-gold))]">
+              Education
+            </p>
+            <h3 className="mt-3 font-serif text-xl font-semibold tracking-tight">
+              {education.title}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {education.organization}
+            </p>
+            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
+              {education.description}
+            </p>
+          </StaggerItem>
+        </Stagger>
+
+        <div className="border-t border-[hsl(var(--hairline))] pt-10">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-[hsl(var(--label-gold))]">
+            Community & volunteering
+          </p>
+          <Stagger className="mt-6 space-y-8">
+            {communityHighlights.map((item) => (
+              <StaggerItem key={`${item.title}-${item.organization}`}>
+                <article>
+                  <p className="text-sm text-muted-foreground">{item.period}</p>
+                  <h3 className="mt-2 font-serif text-lg font-semibold tracking-tight">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-foreground/80">
+                    {item.organization}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-[15px] leading-7 text-muted-foreground">
+                    {item.description}
+                  </p>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </div>
-    </section>
+    </SectionRail>
   );
 }

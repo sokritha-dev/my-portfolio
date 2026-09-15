@@ -25,8 +25,8 @@ export function SiteNavigation({ active }: SiteNavigationProps) {
               className={cn(
                 "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                 isActive
-                  ? "border-[hsl(var(--accent-strong)/0.35)] bg-[hsl(var(--accent-soft))] text-foreground"
-                  : "border-border/60 bg-background/50 text-muted-foreground"
+                  ? "border-foreground/30 bg-foreground/5 text-foreground"
+                  : "border-[hsl(var(--hairline))] text-muted-foreground hover:text-foreground"
               )}
             >
               {link.label === "About" ? "About Me" : "Technical Notes"}
@@ -43,19 +43,20 @@ export function SiteNavigation({ active }: SiteNavigationProps) {
             <Link
               key={link.id}
               href={link.href}
-              aria-label={link.label === "About" ? "About Me" : "Technical Notes"}
+              aria-label={
+                link.label === "About" ? "About Me" : "Technical Notes"
+              }
               className={cn(
-                "flex h-36 w-14 items-center justify-center rounded-[1.5rem] border bg-card/85 px-2 py-4 shadow-[var(--shadow-soft)] backdrop-blur transition-all duration-200",
+                "flex h-36 w-14 items-center justify-center rounded-[1.5rem] border bg-card/90 px-2 py-4 transition-colors",
                 isActive
-                  ? "border-[hsl(var(--accent-strong)/0.35)] bg-[hsl(var(--accent-soft))] text-foreground"
-                  : "border-border/60 text-muted-foreground hover:border-border hover:text-foreground"
+                  ? "border-foreground/30 text-foreground"
+                  : "border-[hsl(var(--hairline))] text-muted-foreground hover:text-foreground"
               )}
             >
               <span
                 className={cn(
                   "text-xs font-semibold uppercase tracking-[0.28em]",
-                  "rotate-180 [writing-mode:vertical-rl]",
-                  isActive ? "text-[hsl(var(--accent-strong))]" : ""
+                  "rotate-180 [writing-mode:vertical-rl]"
                 )}
               >
                 {link.label}
