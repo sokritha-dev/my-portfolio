@@ -248,6 +248,13 @@ export const communityHighlights: TimelineItem[] = [
       "Reviewed student game submissions for a national innovation program supported by MoEYS and UNICEF, with a focus on creativity and impact.",
   },
   {
+    title: "Hackathon participant",
+    organization: "Spin-Offs · CADT Innovation Center",
+    period: "Aug–Sep 2023",
+    description:
+      "Completed the full Spin-Offs program at the Cambodia Academy of Digital Technology — from orientation and market research through user validation, MVP build and iteration with business and technical mentors, to pitch day.",
+  },
+  {
     title: "Trainer",
     organization: "Institute of Technology of Cambodia",
     period: "2019 · 3 months",
@@ -370,9 +377,5 @@ export const contactLinks = [
   {
     label: "Resume",
     href: "/cv.pdf",
-  },
-  {
-    label: "Notes",
-    href: "/notes",
   },
 ];
