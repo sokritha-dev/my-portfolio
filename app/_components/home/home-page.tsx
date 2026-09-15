@@ -7,6 +7,7 @@ import { MetricsSection } from "@/app/_components/home/metrics-section";
 import { ProjectsSection } from "@/app/_components/home/projects-section";
 import { SkillsSection } from "@/app/_components/home/skills-section";
 import { WelcomeIntro } from "@/app/_components/home/welcome-intro";
+import { Firefly } from "@/app/_components/firefly";
 import { SiteHeader } from "@/app/_components/site-header";
 
 export default function HomePage() {
@@ -22,6 +23,7 @@ export default function HomePage() {
       <SkillsSection />
       <AvailabilitySection />
       <ContactSection />
+      <Firefly />
     </main>
   );
 }

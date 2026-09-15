@@ -32,6 +32,33 @@
     --label-gold: 36 35% 42%;
     --status-blue: 214 72% 52%;
     --hairline: 30 8% 86%;
+    --firefly: 72 85% 55%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 40 10% 92%;
+    --card: 0 0% 7%;
+    --card-foreground: 40 10% 92%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 10% 92%;
+    --primary: 40 10% 92%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 40 10% 92%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 40 6% 62%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 40 10% 92%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 72 85% 55%;
+    --label-gold: 40 28% 58%;
+    --status-blue: 214 80% 68%;
+    --hairline: 0 0% 18%;
+    --firefly: 72 90% 60%;
   }
 }
 
@@ -44,6 +71,7 @@
     @apply bg-background text-foreground antialiased;
     min-height: 100vh;
     overflow-x: clip;
+    transition: background-color 0.55s ease, color 0.45s ease;
   }
 
   html {

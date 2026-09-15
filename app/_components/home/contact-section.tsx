@@ -11,7 +11,7 @@ export function ContactSection() {
   const secondaryLinks = contactLinks.filter((link) => link.label !== "Email");
 
   return (
-    <SectionRail id="contact" label="Contact" className="pb-8">
+    <SectionRail id="contact" label="Contact" className="pb-28 sm:pb-32">
       <Reveal>
         <div className="min-w-0">
           <p className="text-sm text-muted-foreground">
