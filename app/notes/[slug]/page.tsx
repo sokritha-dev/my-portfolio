@@ -2,11 +2,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { NoteSections } from "@/app/_components/notes/note-sections";
-import { SiteNavigation } from "@/app/_components/site-navigation";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { getNoteBySlug, getNoteSlugs } from "@/lib/sanity/notes";
+import { NoteBody } from "@/app/_components/notes/note-body";
+import { NoteMeta } from "@/app/_components/notes/note-meta";
+import {
+  NoteSeriesLabel,
+  NoteSeriesPager,
+} from "@/app/_components/notes/note-series-nav";
+import { NoteTakeaways } from "@/app/_components/notes/note-takeaways";
+import { NoteToc } from "@/app/_components/notes/note-toc";
+import { NotesHeader } from "@/app/_components/notes/notes-header";
+import {
+  getNoteBySlug,
+  getNoteSlugs,
+  noteSeoDescription,
+} from "@/lib/sanity/notes";
 import { isSanityConfigured } from "@/lib/sanity/client";
 
 type Props = {
@@ -43,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${note.title} | Notes`,
-    description: note.summary,
+    description: noteSeoDescription(note),
   };
 }
 
@@ -60,35 +69,73 @@ export default async function NoteDetailPage({ params }: Props) {
     notFound();
   }
 
+  const takeaways = note.takeaways ?? [];
+  const showToc = note.toc.length >= 2;
+
   return (
-    <main className="px-4 py-10 sm:px-6 lg:px-8 lg:pl-24">
-      <div className="mx-auto max-w-7xl">
-        <SiteNavigation active="notes" />
-        <article className="mt-6 rounded-[calc(var(--radius)*2)] border border-border/60 bg-card p-6 shadow-[var(--shadow-soft)] sm:p-10 lg:mt-0">
-          <div className="flex flex-wrap gap-2">
-            {note.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="rounded-full px-3 py-1">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-          <p className="mt-6 text-sm text-muted-foreground">{note.displayDate}</p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
-            {note.title}
-          </h1>
-          <p className="mt-5 text-base leading-7 text-muted-foreground sm:text-lg">
-            {note.summary}
-          </p>
+    <>
+      <NotesHeader active="notes" />
+      <main className="px-4 pb-16 pt-8 sm:px-8 sm:pb-24 sm:pt-12 lg:px-10">
+        <article className="mx-auto max-w-5xl">
+          <div
+            className={
+              showToc
+                ? "lg:grid lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_12rem] xl:gap-16"
+                : undefined
+            }
+          >
+            <div className="min-w-0 max-w-2xl">
+              {showToc ? (
+                <div className="mb-8 lg:hidden">
+                  <NoteToc headings={note.toc} />
+                </div>
+              ) : null}
 
-          <NoteSections sections={note.sections} />
+              {note.seriesNav ? (
+                <div className="mb-4">
+                  <NoteSeriesLabel seriesNav={note.seriesNav} />
+                </div>
+              ) : null}
 
-          <div className="mt-12">
-            <Button asChild variant="outline" className="rounded-full">
-              <Link href="/notes">Back to notes</Link>
-            </Button>
+              <NoteMeta
+                displayDate={note.displayDate}
+                readingTimeLabel={note.readingTimeLabel}
+                tags={note.tags}
+              />
+              <h1 className="mt-4 font-serif text-3xl font-semibold leading-tight tracking-tight text-balance sm:mt-5 sm:text-5xl">
+                {note.title}
+              </h1>
+
+              <div className="mt-8">
+                <NoteTakeaways takeaways={takeaways} />
+              </div>
+
+              <NoteBody body={note.body} toc={note.toc} />
+
+              {note.seriesNav ? (
+                <NoteSeriesPager seriesNav={note.seriesNav} />
+              ) : null}
+
+              <div className="mt-12 border-t border-[hsl(var(--hairline))] pt-8">
+                <Link
+                  href="/notes"
+                  className="text-sm text-foreground underline underline-offset-4 decoration-foreground/40 transition-colors hover:decoration-foreground"
+                >
+                  Back to notes
+                </Link>
+              </div>
+            </div>
+
+            {showToc ? (
+              <aside className="relative hidden lg:block">
+                <div className="sticky top-24">
+                  <NoteToc headings={note.toc} />
+                </div>
+              </aside>
+            ) : null}
           </div>
         </article>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

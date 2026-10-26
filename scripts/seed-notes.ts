@@ -1,4 +1,4 @@
-import "./sanity/env-loader.node";
+import "../sanity/env-loader.node";
 
 import { getCliClient } from "sanity/cli";
 
@@ -18,15 +18,24 @@ async function seedNotesToSanity() {
         _type: "slug",
         current: note.slug,
       },
-      summary: note.summary,
       publishedAt: note.publishedAt,
       tags: note.tags,
-      sections: note.sections.map((section, index) => ({
-        _type: "section",
-        _key: `${note.slug}-section-${index}`,
-        heading: section.heading,
-        paragraphs: section.paragraphs,
-        bullets: section.bullets ?? [],
+      ...(note.series
+        ? {
+            series: {
+              title: note.series.title,
+              slug: {
+                _type: "slug",
+                current: note.series.slug,
+              },
+              part: note.series.part,
+            },
+          }
+        : {}),
+      takeaways: note.takeaways,
+      body: note.body.map((block, index) => ({
+        ...block,
+        _key: `${note.slug}-body-${index}`,
       })),
     });
   }

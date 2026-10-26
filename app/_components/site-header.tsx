@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
+  { label: "Notes", href: "/notes" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -20,17 +21,25 @@ export function SiteHeader() {
           Yen Sokritha
         </Link>
         <nav className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 sm:gap-x-6 md:gap-x-7">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground sm:text-xs sm:tracking-[0.14em]"
-              )}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const className = cn(
+              "text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground sm:text-xs sm:tracking-[0.14em]"
+            );
+
+            if (link.href.startsWith("/")) {
+              return (
+                <Link key={link.href} href={link.href} className={className}>
+                  {link.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a key={link.href} href={link.href} className={className}>
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
       </div>
     </header>

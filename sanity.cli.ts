@@ -1,8 +1,8 @@
-import "./env-loader.node";
+import "./sanity/env-loader.node";
 
 import { defineCliConfig } from "sanity/cli";
 
-import { dataset, projectId } from "./env";
+import { dataset, projectId } from "./sanity/env";
 
 export default defineCliConfig({
   api: {
