@@ -8,6 +8,12 @@ export type SeedBodyBlock =
   | { _type: "noteParagraph"; text: string }
   | { _type: "noteBullets"; items: string[] }
   | {
+      _type: "noteTable";
+      caption?: string;
+      headers: string[];
+      rows: Array<{ cells: string[] }>;
+    }
+  | {
       _type: "noteCode";
       code: string;
       language?: string;

@@ -150,6 +150,63 @@ export const note = defineType({
         }),
         defineArrayMember({
           type: "object",
+          name: "noteTable",
+          title: "Table",
+          fields: [
+            defineField({
+              name: "caption",
+              title: "Caption (optional)",
+              type: "string",
+            }),
+            defineField({
+              name: "headers",
+              title: "Header row",
+              type: "array",
+              of: [{ type: "string" }],
+              validation: (Rule) => Rule.required().min(1),
+            }),
+            defineField({
+              name: "rows",
+              title: "Rows",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  name: "noteTableRow",
+                  fields: [
+                    defineField({
+                      name: "cells",
+                      title: "Cells",
+                      type: "array",
+                      of: [{ type: "string" }],
+                      validation: (Rule) => Rule.required().min(1),
+                    }),
+                  ],
+                  preview: {
+                    select: { cells: "cells" },
+                    prepare: ({ cells }) => ({
+                      title: Array.isArray(cells)
+                        ? cells.join(" · ")
+                        : "Row",
+                    }),
+                  },
+                }),
+              ],
+              validation: (Rule) => Rule.required().min(1),
+            }),
+          ],
+          preview: {
+            select: { headers: "headers", rows: "rows", caption: "caption" },
+            prepare: ({ headers, rows, caption }) => ({
+              title: caption || "Table",
+              subtitle: Array.isArray(headers)
+                ? `${headers.length} cols · ${Array.isArray(rows) ? rows.length : 0} rows`
+                : undefined,
+            }),
+          },
+        }),
+        defineArrayMember({
+          type: "object",
           name: "noteImage",
           title: "Image",
           fields: [

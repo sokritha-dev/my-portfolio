@@ -64,6 +64,58 @@ export function NoteBody({ body, toc }: NoteBodyProps) {
                 ))}
               </ul>
             );
+          case "noteTable": {
+            const headers = block.headers ?? [];
+            const rows = block.rows ?? [];
+
+            if (headers.length === 0 || rows.length === 0) {
+              return null;
+            }
+
+            return (
+              <figure key={block._key} className="space-y-2">
+                <div className="overflow-x-auto border border-[hsl(var(--hairline))]">
+                  <table className="w-full min-w-[28rem] border-collapse text-left text-[13px] leading-6 sm:text-sm sm:leading-7">
+                    <thead>
+                      <tr className="border-b border-[hsl(var(--hairline))] bg-[hsl(var(--muted)/0.55)]">
+                        {headers.map((header) => (
+                          <th
+                            key={header}
+                            scope="col"
+                            className="px-3 py-2.5 font-medium text-foreground sm:px-4"
+                          >
+                            {header}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((row, rowIndex) => (
+                        <tr
+                          key={row._key ?? `row-${rowIndex}`}
+                          className="border-b border-[hsl(var(--hairline))] last:border-b-0"
+                        >
+                          {(row.cells ?? []).map((cell, cellIndex) => (
+                            <td
+                              key={`${rowIndex}-${cellIndex}`}
+                              className="px-3 py-2.5 align-top text-foreground/90 sm:px-4"
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {block.caption ? (
+                  <figcaption className="text-sm italic text-muted-foreground">
+                    {block.caption}
+                  </figcaption>
+                ) : null}
+              </figure>
+            );
+          }
           case "noteImage": {
             const asset = block.image?.asset;
             let src: string | null = asset?.url ?? null;

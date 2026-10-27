@@ -21,7 +21,12 @@ export const notesListQuery = `*[_type == "note" && defined(slug.current)] | ord
     caption,
     code,
     language,
-    filename
+    filename,
+    headers,
+    rows[] {
+      _key,
+      cells
+    }
   }
 }`;
 
@@ -43,6 +48,11 @@ export const noteBySlugQuery = `*[_type == "note" && slug.current == $slug][0] {
     code,
     language,
     filename,
+    headers,
+    rows[] {
+      _key,
+      cells
+    },
     image {
       asset->{
         _id,

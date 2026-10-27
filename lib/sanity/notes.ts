@@ -66,6 +66,14 @@ export function bodyToPlainText(body: NoteBodyBlock[] | undefined): string {
           return [block.alt, block.caption].filter(Boolean).join(" ");
         case "noteCode":
           return block.code;
+        case "noteTable":
+          return [
+            block.caption,
+            ...(block.headers ?? []),
+            ...(block.rows ?? []).flatMap((row) => row.cells ?? []),
+          ]
+            .filter(Boolean)
+            .join(" ");
         default: {
           const _exhaustive: never = block;
           return _exhaustive;

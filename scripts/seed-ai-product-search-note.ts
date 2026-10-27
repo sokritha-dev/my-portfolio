@@ -58,10 +58,25 @@ async function seedAiProductSearchNote() {
 
   bodySource.splice(insertIndex, 0, flowImageBlock as never);
 
-  const body = bodySource.map((block, index) => ({
-    ...block,
-    _key: `${slug}-body-${index}`,
-  }));
+  const body = bodySource.map((block, index) => {
+    const withKey = {
+      ...block,
+      _key: `${slug}-body-${index}`,
+    };
+
+    if (block._type === "noteTable") {
+      return {
+        ...withKey,
+        rows: block.rows.map((row, rowIndex) => ({
+          _type: "noteTableRow",
+          _key: `${slug}-body-${index}-row-${rowIndex}`,
+          cells: row.cells,
+        })),
+      };
+    }
+
+    return withKey;
+  });
 
   await client.createOrReplace({
     _id: `note-${slug}`,

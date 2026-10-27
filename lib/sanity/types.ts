@@ -45,10 +45,24 @@ export type NoteCodeBlock = {
   filename?: string;
 };
 
+export type NoteTableRow = {
+  _key?: string;
+  cells: string[];
+};
+
+export type NoteTableBlock = {
+  _type: "noteTable";
+  _key: string;
+  caption?: string;
+  headers: string[];
+  rows: NoteTableRow[];
+};
+
 export type NoteBodyBlock =
   | NoteHeadingBlock
   | NoteParagraphBlock
   | NoteBulletsBlock
+  | NoteTableBlock
   | NoteImageBlock
   | NoteCodeBlock;
 
