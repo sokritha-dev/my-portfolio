@@ -9,7 +9,8 @@
     "lint": "next lint",
     "sanity:dev": "node scripts/sync-sanity-studio-env.mjs && sanity dev",
     "sanity:deploy": "node scripts/sync-sanity-studio-env.mjs && sanity deploy",
-    "sanity:seed": "sanity exec scripts/seed-notes.ts --with-user-token"
+    "sanity:seed": "sanity exec scripts/seed-notes.ts --with-user-token",
+    "sanity:seed:ai-search": "sanity exec scripts/seed-ai-product-search-note.ts --with-user-token"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
