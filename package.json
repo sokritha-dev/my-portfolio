@@ -14,10 +14,13 @@
     "sanity:seed:owasp": "sanity exec scripts/seed-owasp-top10-note.ts --with-user-token",
     "sanity:seed:a01": "sanity exec scripts/seed-a01-broken-access-control-note.ts --with-user-token",
     "sanity:seed:embeddings": "sanity exec scripts/seed-embeddings-explainer-note.ts --with-user-token",
-    "sanity:link-related": "sanity exec scripts/link-related-notes.ts --with-user-token"
+    "sanity:link-related": "sanity exec scripts/link-related-notes.ts --with-user-token",
+    "chat:index": "tsx scripts/index-portfolio-chat.ts"
   },
   "dependencies": {
+    "@google/genai": "^2.32.0",
     "@hookform/resolvers": "^3.9.0",
+    "@pinecone-database/pinecone": "^9.1.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
@@ -82,6 +85,8 @@
   },
   "devDependencies": {
     "@sanity/vision": "^4.22.0",
-    "sanity": "^4.22.0"
+    "dotenv": "^18.0.9",
+    "sanity": "^4.22.0",
+    "tsx": "^4.23.15"
   }
 }

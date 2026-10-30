@@ -2,6 +2,8 @@ import "./globals.css";
 import { Fraunces, IBM_Plex_Sans, Noto_Serif_Khmer } from "next/font/google";
 import type { Metadata } from "next";
 
+import { PortfolioChat } from "@/app/_components/chat/portfolio-chat";
+
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -55,6 +57,7 @@ export default function RootLayout({
     >
       <body className="font-sans bg-background text-foreground antialiased">
         {children}
+        <PortfolioChat />
       </body>
     </html>
   );

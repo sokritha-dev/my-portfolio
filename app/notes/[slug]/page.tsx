@@ -25,7 +25,8 @@ type Props = {
   }>;
 };
 
-export const dynamicParams = false;
+/** Allow newly published Sanity notes without a full rebuild. */
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   if (!isSanityConfigured()) {
