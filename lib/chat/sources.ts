@@ -36,12 +36,26 @@ function pushUnique(sources: ChatSource[], source: ChatSource) {
 }
 
 function shouldAttachContactCards(answer: string): boolean {
-  return (
+  if (
     /mailto:/i.test(answer) ||
     /sokritha\.dev@gmail\.com/i.test(answer) ||
     /linkedin\.com\/in\/sokritha/i.test(answer) ||
     /\/cv\.pdf/i.test(answer) ||
     /\[(?:Email|LinkedIn|Resume)\]\(/i.test(answer)
+  ) {
+    return true;
+  }
+
+  // Plain-language contact replies (model is told not to paste raw URLs).
+  const mentionsEmail = /\bemail\b/i.test(answer);
+  const mentionsLinkedIn = /\blinkedin\b/i.test(answer);
+  const mentionsResume = /\b(?:resume|cv)\b/i.test(answer);
+  const channelCount =
+    Number(mentionsEmail) + Number(mentionsLinkedIn) + Number(mentionsResume);
+
+  return (
+    channelCount >= 2 ||
+    (/\b(?:contact|reach|get in touch)\b/i.test(answer) && channelCount >= 1)
   );
 }
 
