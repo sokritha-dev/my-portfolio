@@ -208,9 +208,11 @@ async function fetchSeriesParts(
 }
 
 function buildRelatedLinks(
-  relatedNotes: NoteRelated[] | null | undefined
+  relatedNotes: NoteRelated[] | null | undefined,
+  /** Series notes already have prev/next; skip Related there. */
+  hasSeries: boolean
 ): NoteRelatedLink[] {
-  if (!relatedNotes?.length) {
+  if (hasSeries || !relatedNotes?.length) {
     return [];
   }
 
@@ -261,14 +263,15 @@ export async function getNoteBySlug(slug: string): Promise<NoteDetail | null> {
   const seriesParts = note.series?.slug
     ? await fetchSeriesParts(note.series.slug)
     : [];
+  const seriesNav = buildSeriesNav(note.series, seriesParts);
 
   return {
     ...withMeta,
     body: note.body ?? [],
     takeaways: note.takeaways ?? [],
     toc: extractTocHeadings(note.body),
-    seriesNav: buildSeriesNav(note.series, seriesParts),
-    related: buildRelatedLinks(note.relatedNotes),
+    seriesNav,
+    related: buildRelatedLinks(note.relatedNotes, Boolean(seriesNav)),
   };
 }
 

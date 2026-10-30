@@ -85,7 +85,7 @@ export const note = defineType({
       name: "relatedNotes",
       title: "Related notes",
       description:
-        "Optional. Curated links shown under this note. Order here is the order on the page.",
+        "Optional. Curated links shown under this note. Skip this for series notes — use Series prev/next instead. Order here is the order on the page.",
       type: "array",
       of: [
         defineArrayMember({
@@ -96,6 +96,13 @@ export const note = defineType({
           },
         }),
       ],
+      hidden: ({ document }) =>
+        Boolean(
+          document?.series &&
+            typeof document.series === "object" &&
+            "title" in document.series &&
+            document.series.title
+        ),
       validation: (Rule) =>
         Rule.max(4).unique().custom((refs, context) => {
           if (!refs?.length) {

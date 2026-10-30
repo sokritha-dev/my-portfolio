@@ -12,6 +12,7 @@
     "sanity:seed": "sanity exec scripts/seed-notes.ts --with-user-token",
     "sanity:seed:ai-search": "sanity exec scripts/seed-ai-product-search-note.ts --with-user-token",
     "sanity:seed:owasp": "sanity exec scripts/seed-owasp-top10-note.ts --with-user-token",
+    "sanity:seed:a01": "sanity exec scripts/seed-a01-broken-access-control-note.ts --with-user-token",
     "sanity:seed:embeddings": "sanity exec scripts/seed-embeddings-explainer-note.ts --with-user-token",
     "sanity:link-related": "sanity exec scripts/link-related-notes.ts --with-user-token"
   },

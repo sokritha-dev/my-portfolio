@@ -15,6 +15,9 @@ const RELATED_BY_SLUG: Record<string, string[]> = {
   "ai-product-search-step-by-step": [
     "how-can-a-list-of-numbers-understand-a-product",
   ],
+  // Series notes use series prev/next instead of Related.
+  "owasp-top10-overview": [],
+  "a01-broken-access-control-explained-with-code": [],
 };
 
 const client = getCliClient();
