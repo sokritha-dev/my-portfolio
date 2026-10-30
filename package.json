@@ -11,7 +11,9 @@
     "sanity:deploy": "node scripts/sync-sanity-studio-env.mjs && sanity deploy",
     "sanity:seed": "sanity exec scripts/seed-notes.ts --with-user-token",
     "sanity:seed:ai-search": "sanity exec scripts/seed-ai-product-search-note.ts --with-user-token",
-    "sanity:seed:owasp": "sanity exec scripts/seed-owasp-top10-note.ts --with-user-token"
+    "sanity:seed:owasp": "sanity exec scripts/seed-owasp-top10-note.ts --with-user-token",
+    "sanity:seed:embeddings": "sanity exec scripts/seed-embeddings-explainer-note.ts --with-user-token",
+    "sanity:link-related": "sanity exec scripts/link-related-notes.ts --with-user-token"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

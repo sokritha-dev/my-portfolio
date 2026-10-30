@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { NoteBody } from "@/app/_components/notes/note-body";
 import { NoteMeta } from "@/app/_components/notes/note-meta";
+import { NoteRelated } from "@/app/_components/notes/note-related";
 import {
   NoteSeriesLabel,
   NoteSeriesPager,
@@ -115,6 +116,8 @@ export default async function NoteDetailPage({ params }: Props) {
               {note.seriesNav ? (
                 <NoteSeriesPager seriesNav={note.seriesNav} />
               ) : null}
+
+              <NoteRelated related={note.related} />
 
               <div className="mt-12 border-t border-[hsl(var(--hairline))] pt-8">
                 <Link

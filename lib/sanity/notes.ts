@@ -11,6 +11,8 @@ import type {
   Note,
   NoteBodyBlock,
   NoteListItem,
+  NoteRelated,
+  NoteRelatedLink,
   NoteSeriesNav,
   NoteSeriesPart,
   NoteTocHeading,
@@ -28,6 +30,7 @@ export type NoteDetail = Note & {
   readingTimeLabel: string;
   toc: NoteTocHeading[];
   seriesNav: NoteSeriesNav | null;
+  related: NoteRelatedLink[];
 };
 
 /** Technical notes are short and denser than prose; use a slower pace so min-read scales. */
@@ -38,6 +41,19 @@ function withDisplayDate<T extends { publishedAt: string }>(note: T) {
     ...note,
     displayDate: format(parseISO(note.publishedAt), "MMM d, yyyy"),
   };
+}
+
+/** Hide notes scheduled for the future (still visible in local `next dev`). */
+export function isNoteLive(publishedAt: string, now = new Date()): boolean {
+  if (process.env.NODE_ENV === "development") {
+    return true;
+  }
+
+  const published = parseISO(publishedAt);
+  if (Number.isNaN(published.getTime())) {
+    return false;
+  }
+  return published.getTime() <= now.getTime();
 }
 
 function slugifyHeading(heading: string): string {
@@ -178,12 +194,37 @@ async function fetchSeriesParts(
   seriesSlug: string
 ): Promise<NoteSeriesPart[]> {
   try {
-    return await sanityClient.fetch<NoteSeriesPart[]>(notesBySeriesSlugQuery, {
+    const parts = await sanityClient.fetch<
+      Array<NoteSeriesPart & { publishedAt?: string }>
+    >(notesBySeriesSlugQuery, {
       seriesSlug,
     });
+    return parts.filter(
+      (part) => !part.publishedAt || isNoteLive(part.publishedAt)
+    );
   } catch {
     return [];
   }
+}
+
+function buildRelatedLinks(
+  relatedNotes: NoteRelated[] | null | undefined
+): NoteRelatedLink[] {
+  if (!relatedNotes?.length) {
+    return [];
+  }
+
+  return relatedNotes
+    .filter(
+      (related): related is NoteRelated =>
+        Boolean(related?.slug && related?.title && related?.publishedAt) &&
+        isNoteLive(related.publishedAt)
+    )
+    .map((related) => ({
+      slug: related.slug,
+      title: related.title,
+      displayDate: format(parseISO(related.publishedAt), "MMM d, yyyy"),
+    }));
 }
 
 export async function getAllNotes(): Promise<NotePreview[]> {
@@ -195,7 +236,7 @@ export async function getAllNotes(): Promise<NotePreview[]> {
     const notes = await sanityClient.fetch<
       Array<NoteListItem & { body?: NoteBodyBlock[] }>
     >(notesListQuery);
-    return notes.map(withReadingMeta);
+    return notes.filter((note) => isNoteLive(note.publishedAt)).map(withReadingMeta);
   } catch {
     return [];
   }
@@ -208,7 +249,7 @@ export async function getNoteBySlug(slug: string): Promise<NoteDetail | null> {
 
   const note = await sanityClient.fetch<Note | null>(noteBySlugQuery, { slug });
 
-  if (!note) {
+  if (!note || !isNoteLive(note.publishedAt)) {
     return null;
   }
 
@@ -227,6 +268,7 @@ export async function getNoteBySlug(slug: string): Promise<NoteDetail | null> {
     takeaways: note.takeaways ?? [],
     toc: extractTocHeadings(note.body),
     seriesNav: buildSeriesNav(note.series, seriesParts),
+    related: buildRelatedLinks(note.relatedNotes),
   };
 }
 
@@ -236,10 +278,12 @@ export async function getNoteSlugs(): Promise<string[]> {
   }
 
   try {
-    const slugs = await sanityClient.fetch<Array<{ slug: string }>>(
-      noteSlugsQuery
-    );
-    return slugs.map((entry) => entry.slug);
+    const notes = await sanityClient.fetch<
+      Array<{ slug: string; publishedAt: string }>
+    >(noteSlugsQuery);
+    return notes
+      .filter((entry) => isNoteLive(entry.publishedAt))
+      .map((entry) => entry.slug);
   } catch {
     return [];
   }

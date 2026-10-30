@@ -26,8 +26,13 @@ export const note = defineType({
     defineField({
       name: "publishedAt",
       title: "Published at",
-      type: "date",
+      type: "datetime",
+      description:
+        "Notes with a future date stay hidden until that time (and until the next site rebuild on static export).",
       validation: (Rule) => Rule.required(),
+      options: {
+        timeStep: 15,
+      },
     }),
     defineField({
       name: "tags",
@@ -75,6 +80,36 @@ export const note = defineType({
           validation: (Rule) => Rule.required().integer().min(1),
         }),
       ],
+    }),
+    defineField({
+      name: "relatedNotes",
+      title: "Related notes",
+      description:
+        "Optional. Curated links shown under this note. Order here is the order on the page.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "note" }],
+          options: {
+            disableNew: true,
+          },
+        }),
+      ],
+      validation: (Rule) =>
+        Rule.max(4).unique().custom((refs, context) => {
+          if (!refs?.length) {
+            return true;
+          }
+          const selfId = context.document?._id?.replace(/^drafts\./, "");
+          const pointsToSelf = refs.some((ref) => {
+            if (!ref || typeof ref !== "object" || !("_ref" in ref)) {
+              return false;
+            }
+            return ref._ref === selfId || ref._ref === `drafts.${selfId}`;
+          });
+          return pointsToSelf ? "A note cannot relate to itself" : true;
+        }),
     }),
     defineField({
       name: "takeaways",

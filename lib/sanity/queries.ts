@@ -36,6 +36,12 @@ export const noteBySlugQuery = `*[_type == "note" && slug.current == $slug][0] {
   publishedAt,
   tags,
   ${seriesProjection},
+  relatedNotes[]->{
+    "slug": slug.current,
+    title,
+    publishedAt,
+    tags
+  },
   takeaways,
   body[] {
     _type,
@@ -71,7 +77,8 @@ export const noteBySlugQuery = `*[_type == "note" && slug.current == $slug][0] {
 export const notesBySeriesSlugQuery = `*[_type == "note" && defined(slug.current) && series.slug.current == $seriesSlug] | order(series.part asc) {
   "slug": slug.current,
   title,
-  "part": series.part
+  "part": series.part,
+  publishedAt
 }`;
 
-export const noteSlugsQuery = `*[_type == "note" && defined(slug.current)]{ "slug": slug.current }`;
+export const noteSlugsQuery = `*[_type == "note" && defined(slug.current)]{ "slug": slug.current, publishedAt }`;

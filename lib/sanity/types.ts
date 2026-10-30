@@ -81,9 +81,17 @@ export type NoteListItem = {
   takeaways?: string[];
 };
 
+export type NoteRelated = {
+  slug: string;
+  title: string;
+  publishedAt: string;
+  tags?: string[];
+};
+
 export type Note = NoteListItem & {
   takeaways?: string[];
   body: NoteBodyBlock[];
+  relatedNotes?: NoteRelated[] | null;
 };
 
 export type NoteTocHeading = {
@@ -103,4 +111,10 @@ export type NoteSeriesNav = {
   totalParts: number;
   previous: NoteSeriesPart | null;
   next: NoteSeriesPart | null;
+};
+
+export type NoteRelatedLink = {
+  slug: string;
+  title: string;
+  displayDate: string;
 };
