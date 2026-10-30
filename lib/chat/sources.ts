@@ -1,13 +1,31 @@
-import { heroContent } from "@/lib/home-content";
+import { contactLinks, heroContent } from "@/lib/home-content";
 import { getAllNotes } from "@/lib/sanity/notes";
 
 export type ChatSource = {
-  kind: "note" | "page";
+  kind: "note" | "page" | "contact";
   title: string;
   url: string;
   eyebrow: string;
   description?: string;
   meta?: string;
+};
+
+const CONTACT_CARD_COPY: Record<
+  string,
+  { description: string; meta: string }
+> = {
+  Email: {
+    description: "sokritha.dev@gmail.com",
+    meta: "Preferred",
+  },
+  LinkedIn: {
+    description: "linkedin.com/in/sokritha-yen",
+    meta: "Profile",
+  },
+  Resume: {
+    description: "Download the latest PDF resume",
+    meta: "PDF",
+  },
 };
 
 function pushUnique(sources: ChatSource[], source: ChatSource) {
@@ -17,9 +35,36 @@ function pushUnique(sources: ChatSource[], source: ChatSource) {
   sources.push(source);
 }
 
+function shouldAttachContactCards(answer: string): boolean {
+  return (
+    /mailto:/i.test(answer) ||
+    /sokritha\.dev@gmail\.com/i.test(answer) ||
+    /linkedin\.com\/in\/sokritha/i.test(answer) ||
+    /\/cv\.pdf/i.test(answer) ||
+    /\[(?:Email|LinkedIn|Resume)\]\(/i.test(answer)
+  );
+}
+
+function pushContactSources(sources: ChatSource[]) {
+  for (const link of contactLinks) {
+    const copy = CONTACT_CARD_COPY[link.label] ?? {
+      description: link.href,
+      meta: "Link",
+    };
+    pushUnique(sources, {
+      kind: "contact",
+      title: link.label,
+      url: link.href,
+      eyebrow: "Contact",
+      description: copy.description,
+      meta: copy.meta,
+    });
+  }
+}
+
 /**
- * Turn paths mentioned in the model answer into rich preview payloads
- * (real note titles, dates, takeaways) for the chat UI.
+ * Turn paths / contact mentions in the model answer into rich preview payloads
+ * for the chat UI.
  */
 export async function resolveChatSources(answer: string): Promise<ChatSource[]> {
   const sources: ChatSource[] = [];
@@ -71,6 +116,10 @@ export async function resolveChatSources(answer: string): Promise<ChatSource[]> 
     });
   }
 
+  if (shouldAttachContactCards(answer)) {
+    pushContactSources(sources);
+  }
+
   if (
     sources.length === 0 &&
     (/\bhome page\b|\babout (?:page|me|him)\b|\bportfolio\b/i.test(answer) ||
@@ -87,4 +136,20 @@ export async function resolveChatSources(answer: string): Promise<ChatSource[]> 
   }
 
   return sources;
+}
+
+/** Soften raw markdown links in assistant text when contact cards are shown. */
+export function simplifyAnswerForSources(
+  answer: string,
+  sources: ChatSource[]
+): string {
+  const hasContact = sources.some((source) => source.kind === "contact");
+  if (!hasContact) {
+    return answer;
+  }
+
+  return answer
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }

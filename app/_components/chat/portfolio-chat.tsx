@@ -4,7 +4,10 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 
 import { SourceLinkCard } from "@/app/_components/chat/source-link-card";
-import type { ChatSource } from "@/lib/chat/sources";
+import {
+  simplifyAnswerForSources,
+  type ChatSource,
+} from "@/lib/chat/sources";
 
 type ChatMessage = {
   id: string;
@@ -209,10 +212,18 @@ export function PortfolioChat() {
           }
 
           if (event.type === "sources") {
+            const fullText = `${revealedRef.current}${revealBufferRef.current}`;
+            const cleaned = simplifyAnswerForSources(fullText, event.sources);
+            revealBufferRef.current = "";
+            revealedRef.current = cleaned;
             setMessages((current) =>
               current.map((item) =>
                 item.id === assistantId
-                  ? { ...item, sources: event.sources }
+                  ? {
+                      ...item,
+                      content: cleaned,
+                      sources: event.sources,
+                    }
                   : item
               )
             );
