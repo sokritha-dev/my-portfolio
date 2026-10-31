@@ -98,6 +98,21 @@ export async function upsertPortfolioChunks(input: {
   }
 }
 
+/** Remove existing vectors for a note before re-upserting (handles shorter edits). */
+export async function deletePortfolioChunksBySlug(input: {
+  apiKey: string;
+  indexName: string;
+  slug: string;
+}) {
+  const index = getPineconeIndex(input.apiKey, input.indexName).namespace(
+    CHAT_PINECONE_NAMESPACE
+  );
+
+  await index.deleteMany({
+    filter: { slug: { $eq: input.slug } },
+  });
+}
+
 export async function queryPortfolioChunks(input: {
   apiKey: string;
   indexName: string;
