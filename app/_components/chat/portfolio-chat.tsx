@@ -58,7 +58,7 @@ export function PortfolioChat() {
       id: "welcome",
       role: "assistant",
       content:
-        "Ask about my notes, projects, or background. I answer from this portfolio only.",
+        "I'm an AI Assistant that answers from this portfolio only — notes, projects, and background.",
     },
   ]);
   const listRef = useRef<HTMLDivElement>(null);
@@ -290,7 +290,7 @@ export function PortfolioChat() {
                 Ask the portfolio
               </p>
               <p className="mt-0.5 text-sm text-foreground">
-                Answers from notes & about
+                AI answers from notes & about
               </p>
             </div>
             <button
@@ -391,7 +391,7 @@ export function PortfolioChat() {
         aria-expanded={open}
       >
         <MessageCircle className="h-4 w-4" aria-hidden />
-        {open ? "Close" : "Ask"}
+        {open ? "Close" : "Ask AI"}
       </button>
     </div>
   );
